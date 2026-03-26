@@ -12,8 +12,7 @@ const getAll = async (req, res) => {
 const create = async (req, res) => {
   try {
     const image = req.file ? req.file.filename : null
-    const { name } = req.body
-    const client = await StarClient.create({ name, image })
+    const client = await StarClient.create({ image })
     res.status(201).json(client)
   } catch (err) {
     res.status(400).json({ error: err.message })
@@ -23,7 +22,6 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   try {
     const upd = {}
-    if (req.body.name !== undefined) upd.name = req.body.name
     if (req.file) {
       const old = await StarClient.findById(req.params.id)
       if (old?.image) {
