@@ -42,6 +42,7 @@ app.use('/api/distributor',        require('./routes/distributor'))
 app.use('/api/projects',           require('./routes/projects'))
 app.use('/api/become-distributor', require('./routes/becomeDistributor'))
 app.use('/api/about-slyder',      require('./routes/aboutSlyder'))
+app.use('/api/star-clients',      require('./routes/starClients'))
 
 
 // 404
