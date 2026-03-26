@@ -56,6 +56,14 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`✅ Slyder backend running on http://localhost:${PORT}`)
+
+  // Keep Render free tier awake (pings every 14 minutes)
+  if (process.env.RENDER_EXTERNAL_URL) {
+    setInterval(() => {
+      fetch(`${process.env.RENDER_EXTERNAL_URL}/api/contact`)
+        .catch(() => {})
+    }, 14 * 60 * 1000)
+  }
 });
 
 
