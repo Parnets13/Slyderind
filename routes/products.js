@@ -4,14 +4,24 @@ const { verifyToken } = require('../lib/auth')
 
 // Public
 router.get('/', async (req, res) => {
-  const products = await Product.find().sort({ createdAt: 1 })
-  res.json(products)
+  try {
+    const products = await Product.find().sort({ createdAt: 1 })
+    res.json(products)
+  } catch (err) {
+    console.error('❌ Error fetching products:', err.message)
+    res.status(500).json({ error: 'Failed to fetch products' })
+  }
 })
 
 router.get('/:slug', async (req, res) => {
-  const product = await Product.findOne({ slug: req.params.slug })
-  if (!product) return res.status(404).json({ error: 'Not found' })
-  res.json(product)
+  try {
+    const product = await Product.findOne({ slug: req.params.slug })
+    if (!product) return res.status(404).json({ error: 'Not found' })
+    res.json(product)
+  } catch (err) {
+    console.error('❌ Error fetching product:', err.message)
+    res.status(500).json({ error: 'Failed to fetch product' })
+  }
 })
 
 // Protected

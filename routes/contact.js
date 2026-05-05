@@ -52,7 +52,7 @@ router.post('/message', async (req, res) => {
     // Send email notification
     try {
       await transporter.sendMail({
-        from: `"Slyder Website" <${process.env.GMAIL_USER}>`,
+        from: `"Enquiry Form" <${process.env.GMAIL_USER}>`,
         to: process.env.NOTIFY_EMAIL,
         subject: `New Contact Form: ${subject || 'No Subject'} — from ${name}`,
         html: `
